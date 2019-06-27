@@ -16,6 +16,7 @@
 		6EB1A91722C5048600ED65F4 /* GoodHabitsCanvasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1A91622C5048600ED65F4 /* GoodHabitsCanvasUITests.swift */; };
 		6EB1A92622C5054F00ED65F4 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6EB1A92422C5054F00ED65F4 /* LICENSE */; };
 		6EB1A92722C5055000ED65F4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6EB1A92522C5054F00ED65F4 /* README.md */; };
+		6EB1A92C22C507A200ED65F4 /* WheelOfLife.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1A92B22C507A200ED65F4 /* WheelOfLife.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		6EB1A91822C5048600ED65F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EB1A92422C5054F00ED65F4 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		6EB1A92522C5054F00ED65F4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6EB1A92B22C507A200ED65F4 /* WheelOfLife.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelOfLife.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		6EB1A8F522C5048200ED65F4 /* GoodHabitsCanvas */ = {
 			isa = PBXGroup;
 			children = (
+				6EB1A92A22C5078800ED65F4 /* Model */,
 				6EB1A8F622C5048200ED65F4 /* AppDelegate.swift */,
 				6EB1A8F822C5048200ED65F4 /* ViewController.swift */,
 				6EB1A8FA22C5048200ED65F4 /* Main.storyboard */,
@@ -129,6 +132,14 @@
 				6EB1A91822C5048600ED65F4 /* Info.plist */,
 			);
 			path = GoodHabitsCanvasUITests;
+			sourceTree = "<group>";
+		};
+		6EB1A92A22C5078800ED65F4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6EB1A92B22C507A200ED65F4 /* WheelOfLife.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EB1A8F922C5048200ED65F4 /* ViewController.swift in Sources */,
+				6EB1A92C22C507A200ED65F4 /* WheelOfLife.swift in Sources */,
 				6EB1A8F722C5048200ED65F4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
