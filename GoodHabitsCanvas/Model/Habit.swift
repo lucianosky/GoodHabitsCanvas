@@ -27,5 +27,5 @@ struct Habit {
     var frequency: Frequency
     var repetition: Repetition
     var trackTime: Bool
-    var tracking: [Date]
+    var timestamps: [Date]
 }
