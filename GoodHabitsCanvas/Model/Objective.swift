@@ -12,4 +12,15 @@ struct Objective {
     var description: String
     var slice: WheelSlice
     var isValue: Bool
+    
+    init(objectiveResponse: ObjectiveResponse) {
+        description = objectiveResponse.description
+        slice = WheelSlice(rawValue: objectiveResponse.slice)!
+        isValue = objectiveResponse.isValue
+    }
+    
+    static func listFromResponse(_ response: [ObjectiveResponse]) -> [Objective] {
+        return response.map(Objective.init)
+    }
+
 }

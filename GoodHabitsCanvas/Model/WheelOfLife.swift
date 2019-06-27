@@ -15,7 +15,7 @@ enum WheelQuadrant {
     case qualityOfLife
 }
 
-enum WheelSlice {
+enum WheelSlice: Int {
     case healthAndDisposition
     case intellectualDevelopmemt
     case emotionalBalance
