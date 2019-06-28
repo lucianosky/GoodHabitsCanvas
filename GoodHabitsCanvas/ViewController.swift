@@ -12,7 +12,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Repository.shared.loadFromAPIMock()
+        Repository.shared.loadFromAPIMock { (result) in
+            switch(result) {
+            case .success(_):
+                break
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
 
