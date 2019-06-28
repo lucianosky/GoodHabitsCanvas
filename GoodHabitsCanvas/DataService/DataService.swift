@@ -29,9 +29,7 @@ class DataService: DataServiceProtocol {
                 do {
                     let jsonResponse = try decoder.decode(T.self, from: data)
                     onCompleted(.success(jsonResponse))
-                    print("APIService success!")
                 } catch let error {
-                    print("error \(error)")
                     onCompleted(.failure(error))
                 }
                 
@@ -47,8 +45,8 @@ class DataService: DataServiceProtocol {
         onCompleted: @escaping (ServiceResult<Data>) -> Void) {
         
         guard let url = URL(string: urlString) else {
-            print("Error creating URL")
-            onCompleted(.failure(AppError.dataError("Error creating URL")))
+            print("Error creating URL \(urlString)")
+            onCompleted(.failure(AppError.dataError("Error creating URL \(urlString)")))
             return
         }
         
@@ -75,7 +73,6 @@ class DataService: DataServiceProtocol {
             
         }
         task.resume()
-        
         
     }
     

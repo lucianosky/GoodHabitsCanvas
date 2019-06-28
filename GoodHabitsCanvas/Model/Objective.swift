@@ -14,15 +14,19 @@ struct Objective {
     var slice: WheelSlice
     var isValue: Bool
     
-    init(objectiveResponse: ObjectiveResponse) {
+    init?(objectiveResponse: ObjectiveResponse) {
+        guard let slic = WheelSlice(rawValue: objectiveResponse.slice) else {
+                print("Error in mocked objective id=\(objectiveResponse.id)")
+                return nil
+        }
         id = objectiveResponse.id
         description = objectiveResponse.description
-        slice = WheelSlice(rawValue: objectiveResponse.slice)!
+        slice = slic
         isValue = objectiveResponse.isValue
     }
     
     static func listFromResponse(_ response: [ObjectiveResponse]) -> [Objective] {
-        return response.map(Objective.init)
+        return response.compactMap(Objective.init)
     }
 
 }

@@ -31,18 +31,23 @@ struct Habit {
     var trackTime: Bool
     var timestamps: [Date]
     
-    init(habitResponse: HabitResponse) {
+    init?(habitResponse: HabitResponse) {
+        guard let freq = Frequency(rawValue: habitResponse.frequency),
+            let rep = Repetition(rawValue: habitResponse.repetition) else {
+                print("Error in mocked habit id=\(habitResponse.id)")
+                return nil
+        }
         id = habitResponse.id
         description = habitResponse.description
         idObjective = habitResponse.idObjective
-        frequency = Frequency(rawValue: habitResponse.frequency)!
-        repetition = Repetition(rawValue: habitResponse.repetition)!
+        frequency = freq
+        repetition = rep
         trackTime = habitResponse.trackTime
         timestamps = [Date]()
     }
     
     static func listFromResponse(_ response: [HabitResponse]) -> [Habit] {
-        return response.map(Habit.init)
+        return response.compactMap(Habit.init)
     }
 
 }
