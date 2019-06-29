@@ -12,16 +12,18 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    @IBAction func buttonTouched(_ sender: Any) {
         Repository.shared.loadFromAPIMock { (result) in
             switch(result) {
             case .success(_):
-                break
+                print("Loading success")
             case .failure(let error):
-                print(error)
+                print("Loading error: \(error)")
             }
         }
     }
-
-
+    
 }
 

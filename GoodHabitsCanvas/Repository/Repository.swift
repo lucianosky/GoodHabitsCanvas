@@ -35,6 +35,7 @@ class Repository {
                     self.localDatabase.habits = Habit.listFromResponse(habitsResponse.compactMap{$0})
                     for i in 0..<self.localDatabase.habits.count {
                         self.localDatabase.habits[i].objective = self.localDatabase.objectives.filter{$0.id == self.localDatabase.habits[i].idObjective}[0]
+                        print(self.localDatabase.habits[i])
                     }
                     print("Loaded \(self.localDatabase.objectives.count) mock objectives; and \(self.localDatabase.habits.count) mock habits")
                     onCompleted(.success(true))

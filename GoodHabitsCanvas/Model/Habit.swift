@@ -12,7 +12,7 @@ enum Frequency: Int {
     case daily
     case weekly
     case monthly
-    case quartely // maybe keep maybe delete
+    case quartely // TODO: maybe keep maybe delete
     case yearly
 }
 
@@ -37,13 +37,21 @@ struct Habit {
                 print("Error in mocked habit id=\(habitResponse.id)")
                 return nil
         }
+        var ts = [Date]()
+        for strTimestamp in habitResponse.timestamps {
+            guard let date = habitResponse.trackTime ? Date.fromDateTimeString(strTimestamp) : Date.fromDateString(strTimestamp) else {
+                print("Error in mocked habit timestamps id=\(habitResponse.id)")
+                return nil
+            }
+            ts.append(date)
+        }
         id = habitResponse.id
         description = habitResponse.description
         idObjective = habitResponse.idObjective
         frequency = freq
         repetition = rep
         trackTime = habitResponse.trackTime
-        timestamps = [Date]()
+        timestamps = ts
     }
     
     static func listFromResponse(_ response: [HabitResponse]) -> [Habit] {
@@ -59,4 +67,5 @@ struct HabitResponse: Decodable {
     var frequency: Int
     var repetition: Int
     var trackTime: Bool
+    var timestamps: [String]
 }
