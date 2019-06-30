@@ -13,3 +13,11 @@ struct HabitTrack {
     var timestamp: Date
     var slice: WheelSlice
 }
+
+extension HabitTrack: Comparable {
+
+    static func < (lhs: HabitTrack, rhs: HabitTrack) -> Bool {
+        return lhs.timestamp < rhs.timestamp
+    }
+    
+}

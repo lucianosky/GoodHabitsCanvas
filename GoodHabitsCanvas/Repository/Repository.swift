@@ -13,7 +13,12 @@ private struct LocalDatabase {
     var habits = [Habit]()
 }
 
-class Repository {
+protocol RepositoryProtocol {
+    func loadFromAPIMock(onCompleted: @escaping (ServiceResult<Bool>) -> Void)
+    func getMonthHabitTracks(from: Date, to: Date) -> [HabitTrack]
+}
+
+class Repository: RepositoryProtocol {
 
     static let shared = Repository()
     
@@ -55,6 +60,29 @@ class Repository {
                 onCompleted(.failure(error))
             }
         }
+    }
+    
+    func getMonthHabitTracks(from: Date, to: Date) -> [HabitTrack] {
+        localDatabase.habits.forEach { (habit) in
+            print(habit.description, habit.timestamps)
+        }
+        var filteredHabits = localDatabase.habits.map { (habit) -> Habit in
+            var filteredHabit = habit
+            filteredHabit.timestamps = filteredHabit.timestamps.filter({ (date) -> Bool in
+                return date >= from && date <= to
+            })
+            return filteredHabit
+        }
+        filteredHabits = filteredHabits.filter{ $0.timestamps.count > 0 }
+        var habitTracks = [HabitTrack]()
+        filteredHabits.forEach { (habit) in
+            habit.timestamps.forEach({ (date) in
+                // TODO optional
+                habitTracks.append(HabitTrack.init(description: habit.description, timestamp: date, slice: habit.objective!.slice))
+            })
+        }
+        habitTracks.sort { $0 < $1 }
+        return habitTracks
     }
     
 }

@@ -19,6 +19,8 @@ class ViewController: UIViewController {
             switch(result) {
             case .success(_):
                 print("Loading success")
+                let c = CanvasUseCase()
+                c.getMonthHabitTracks(month: Date())
             case .failure(let error):
                 print("Loading error: \(error)")
             }

@@ -121,6 +121,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		6E3BD8E222C90229007C59BE /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				6EB1A8F822C5048200ED65F4 /* ViewController.swift */,
+				6EB1A8FA22C5048200ED65F4 /* Main.storyboard */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
 		6E72660222C6B61A0040210B /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,11 +168,10 @@
 				6EB1A94822C5725E00ED65F4 /* Repository */,
 				6EB1A93A22C53B7300ED65F4 /* URLSessionWrapper */,
 				6EB1A93322C53A9E00ED65F4 /* DataService */,
+				6E3BD8E222C90229007C59BE /* Scene */,
 				6EB1A94322C53C5700ED65F4 /* Helper */,
 				6E056DF522C6E8BB00DEDE00 /* Extensions */,
 				6EB1A8F622C5048200ED65F4 /* AppDelegate.swift */,
-				6EB1A8F822C5048200ED65F4 /* ViewController.swift */,
-				6EB1A8FA22C5048200ED65F4 /* Main.storyboard */,
 				6EB1A8FD22C5048600ED65F4 /* Assets.xcassets */,
 				6EB1A8FF22C5048600ED65F4 /* LaunchScreen.storyboard */,
 				6EB1A90222C5048600ED65F4 /* Info.plist */,
