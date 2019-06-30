@@ -19,8 +19,15 @@ class ViewController: UIViewController {
             switch(result) {
             case .success(_):
                 print("Loading success")
-                let c = CanvasUseCase()
-                c.getMonthHabitTracks(month: Date())
+                let m = MonthlyViewModel()
+                m.getCurrentMonthHabitTracks(onCompleted: { (result) in
+                    switch(result) {
+                    case .success(_):
+                        print("getCurrentMonthHabitTracks success")
+                    case .failure(let error):
+                        print(error.associatedMessage)
+                    }
+                })
             case .failure(let error):
                 print("Loading error: \(error)")
             }

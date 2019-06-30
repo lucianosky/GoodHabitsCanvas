@@ -8,20 +8,23 @@
 
 import Foundation
 
-class CanvasUseCase {
+protocol CanvasUseCaseProtocol {
+    func getCurrentMonthHabitTracks(onCompleted: @escaping (ServiceResult<[HabitTrack]>) -> Void)
+}
+
+class CanvasUseCase: CanvasUseCaseProtocol {
     
     private var repository: RepositoryProtocol
+    private var calMonth: CalMonth
     
     init(repository: RepositoryProtocol? = nil) {
         self.repository = repository ?? Repository.shared
+        calMonth = CalMonth.init(date: Date())
     }
     
-    func getMonthHabitTracks(month: Date) {
-        let calMonth = CalMonth.init(date: month)
-        print(calMonth)
-        let habitTracks = repository.getMonthHabitTracks(from: calMonth.firstMonthDate, to: calMonth.lastMonthDate)
-        habitTracks.forEach { (habitTrack) in
-            print(habitTrack.description, habitTrack.timestamp, habitTrack.slice)
+    func getCurrentMonthHabitTracks(onCompleted: @escaping (ServiceResult<[HabitTrack]>) -> Void) {
+        repository.getMonthHabitTracks(from: calMonth.firstMonthDate, to: calMonth.lastMonthDate) { (result) in
+            onCompleted(result)
         }
     }
     

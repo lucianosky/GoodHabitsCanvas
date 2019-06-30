@@ -15,7 +15,7 @@ private struct LocalDatabase {
 
 protocol RepositoryProtocol {
     func loadFromAPIMock(onCompleted: @escaping (ServiceResult<Bool>) -> Void)
-    func getMonthHabitTracks(from: Date, to: Date) -> [HabitTrack]
+    func getMonthHabitTracks(from: Date, to: Date, onCompleted: @escaping (ServiceResult<[HabitTrack]>) -> Void)
 }
 
 class Repository: RepositoryProtocol {
@@ -62,7 +62,7 @@ class Repository: RepositoryProtocol {
         }
     }
     
-    func getMonthHabitTracks(from: Date, to: Date) -> [HabitTrack] {
+    func getMonthHabitTracks(from: Date, to: Date, onCompleted: @escaping (ServiceResult<[HabitTrack]>) -> Void)  {
         localDatabase.habits.forEach { (habit) in
             print(habit.description, habit.timestamps)
         }
@@ -77,12 +77,12 @@ class Repository: RepositoryProtocol {
         var habitTracks = [HabitTrack]()
         filteredHabits.forEach { (habit) in
             habit.timestamps.forEach({ (date) in
-                // TODO optional
+                // TODO optional / OR review habit.objective optional status
                 habitTracks.append(HabitTrack.init(description: habit.description, timestamp: date, slice: habit.objective!.slice))
             })
         }
         habitTracks.sort { $0 < $1 }
-        return habitTracks
+        onCompleted(.success(habitTracks))
     }
     
 }
