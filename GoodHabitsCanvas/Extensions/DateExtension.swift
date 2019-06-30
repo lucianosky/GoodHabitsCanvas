@@ -36,7 +36,7 @@ extension Date {
         return (hour, min)
     }
     
-    private static func fromComponents(_ year: Int, _ month: Int, _ day: Int, _ hour: Int, _ min: Int, _ second: Int) -> Date? {
+    static func fromComponents(_ year: Int, _ month: Int, _ day: Int = 1, _ hour: Int = 0, _ min: Int = 0) -> Date? {
         var dateComponents = DateComponents()
         dateComponents.year = year
         dateComponents.month = month
@@ -56,7 +56,7 @@ extension Date {
         else {
             return nil
         }
-        return Date.fromComponents(year, month, day, hour, min, 0)
+        return Date.fromComponents(year, month, day, hour, min)
     }
 
     static func fromDateString(_ dateStr: String) -> Date? {
@@ -65,7 +65,7 @@ extension Date {
             else {
                 return nil
         }
-        return Date.fromComponents(year, month, day, 0, 0, 0)
+        return Date.fromComponents(year, month, day, 0, 0)
     }
 
 }

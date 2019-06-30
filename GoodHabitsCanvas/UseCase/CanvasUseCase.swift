@@ -10,4 +10,8 @@ import Foundation
 
 class CanvasUseCase {
     
+    func getMonthHabitTracks() {
+        
+    }
+    
 }
