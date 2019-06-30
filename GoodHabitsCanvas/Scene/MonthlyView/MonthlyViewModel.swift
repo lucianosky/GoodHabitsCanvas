@@ -10,12 +10,14 @@ import Foundation
 
 protocol MonthlyViewModelProtocol {
     func getCurrentMonthHabitTracks(onCompleted: @escaping (ServiceResult<Bool>) -> Void)
+    var habitTracks: [HabitTrack] { get }
+    var calMonth: CalMonth { get }
 }
 
 class MonthlyViewModel: MonthlyViewModelProtocol {
     
     private var canvasUseCase: CanvasUseCaseProtocol
-    private var habitTracks = [HabitTrack]()
+    private(set) var habitTracks = [HabitTrack]()
     
     init(canvasUseCase: CanvasUseCaseProtocol? = nil) {
         self.canvasUseCase = canvasUseCase ?? CanvasUseCase()
@@ -37,5 +39,8 @@ class MonthlyViewModel: MonthlyViewModelProtocol {
         }
     }
 
+    var calMonth: CalMonth {
+        return canvasUseCase.calMonth
+    }
     
 }

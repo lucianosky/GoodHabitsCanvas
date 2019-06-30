@@ -10,16 +10,18 @@ import Foundation
 
 protocol CanvasUseCaseProtocol {
     func getCurrentMonthHabitTracks(onCompleted: @escaping (ServiceResult<[HabitTrack]>) -> Void)
+    var calMonth: CalMonth { get }
 }
 
 class CanvasUseCase: CanvasUseCaseProtocol {
     
     private var repository: RepositoryProtocol
-    private var calMonth: CalMonth
+    private(set) var calMonth: CalMonth
     
     init(repository: RepositoryProtocol? = nil) {
         self.repository = repository ?? Repository.shared
-        calMonth = CalMonth.init(date: Date())
+        //calMonth = CalMonth.init(date: Date())
+        calMonth = CalMonth.init(date: Date(), startOfWeek: 2)
     }
     
     func getCurrentMonthHabitTracks(onCompleted: @escaping (ServiceResult<[HabitTrack]>) -> Void) {
