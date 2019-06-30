@@ -37,25 +37,7 @@ class MonthlyViewController: BaseViewController {
         super.viewDidLoad()
         createSubviews()
         createConstraints()
-        
-        Repository.shared.loadFromAPIMock { (result) in
-            switch(result) {
-            case .success(_):
-                print("Loading success")
-                self.viewModel.getCurrentMonthHabitTracks(onCompleted: { (result) in
-                    switch(result) {
-                    case .success(_):
-                        print("getCurrentMonthHabitTracks success")
-                        self.getCurrentMonthHabitTracks()
-                    case .failure(let error):
-                        print(error.associatedMessage)
-                    }
-                })
-            case .failure(let error):
-                print("Loading error: \(error)")
-            }
-        }
-
+        initialLoad()
     }
     
     private func createSubviews() {
@@ -76,9 +58,20 @@ class MonthlyViewController: BaseViewController {
         activateConstraints("H:|[tbl]|", views: dict)
     }
     
+    private func initialLoad() {
+        Repository.shared.loadFromAPIMock { [weak self] (result) in
+            switch(result) {
+            case .success(_):
+                print("Loading success")
+                self?.getCurrentMonthHabitTracks()
+            case .failure(let error):
+                print("Loading error: \(error)")
+            }
+        }
+    }
     
     private func getCurrentMonthHabitTracks() {
-        viewModel.getCurrentMonthHabitTracks { (result) in
+        viewModel.getCurrentMonthHabitTracks { [weak self] (result) in
             switch(result) {
             case .success(_):
                 break
@@ -86,7 +79,7 @@ class MonthlyViewController: BaseViewController {
                 print("error \(error)")
             }
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             }
         }
     }
