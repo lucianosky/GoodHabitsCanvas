@@ -43,8 +43,7 @@ class MonthlyViewController: BaseViewController {
     private func createSubviews() {
         title = Consts.title
         view.backgroundColor = .white
-        //tableView.register(DragonTableViewCell.self, forCellReuseIdentifier: Consts.tableCellId)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Consts.tableCellId)
+        tableView.register(WeekTableViewCell.self, forCellReuseIdentifier: Consts.tableCellId)
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
@@ -93,12 +92,13 @@ extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Consts.tableCellId, for: IndexPath(row: indexPath.row, section: 0)) as? UITableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Consts.tableCellId, for: IndexPath(row: indexPath.row, section: 0)) as? WeekTableViewCell
             else { return UITableViewCell() }
         let calWeek = self.viewModel.calMonth.calWeeks[indexPath.row]
-        cell.textLabel?.text = calWeek.days.reduce("", { (result, calDay) -> String in
-            return result + " " + calDay.text
-        })
+        cell.configure(from: calWeek)
+//        cell.textLabel?.text = calWeek.days.reduce("", { (result, calDay) -> String in
+//            return result + " " + calDay.text
+//        })
         return cell
         
     }
