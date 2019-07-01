@@ -89,13 +89,13 @@ class MonthlyViewController: BaseViewController {
 extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.calMonth.getWeeks().count
+        return self.viewModel.calMonth.calWeeks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Consts.tableCellId, for: IndexPath(row: indexPath.row, section: 0)) as? UITableViewCell
             else { return UITableViewCell() }
-        let calWeek = self.viewModel.calMonth.getWeeks()[indexPath.row]
+        let calWeek = self.viewModel.calMonth.calWeeks[indexPath.row]
         cell.textLabel?.text = calWeek.days.reduce("", { (result, calDay) -> String in
             return result + " " + calDay.text
         })
