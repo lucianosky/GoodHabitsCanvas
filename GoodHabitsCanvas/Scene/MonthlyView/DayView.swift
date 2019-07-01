@@ -9,10 +9,10 @@
 import UIKit
 
 // TODO
-enum HabitState {
+enum DayViewState {
     case none
-    case done
-    case notDone
+    case single
+    case multiple
 }
 
 class DayView: UIView {
@@ -25,7 +25,7 @@ class DayView: UIView {
         }
     }
     
-    var habitState: HabitState = .none {
+    var state: DayViewState = .none {
         didSet {
             self.setNeedsDisplay()
         }
@@ -37,11 +37,11 @@ class DayView: UIView {
         }
     }
     
-    var shrink: Bool = false {
-        didSet {
-            self.setNeedsDisplay()
-        }
-    }
+//    var shrink: Bool = false {
+//        didSet {
+//            self.setNeedsDisplay()
+//        }
+//    }
     
     var date: Date?
     
@@ -58,7 +58,7 @@ class DayView: UIView {
             "self" : self,
         ]
         
-        backgroundColor = .background
+        backgroundColor = UIColor.dracula.background
         translatesAutoresizingMaskIntoConstraints = false
         
         activateConstraints("V:[self(\(diameter))]", views: viewsDict)
@@ -72,12 +72,12 @@ class DayView: UIView {
     
     private func drawCircle() {
         // color for inactive and none
-        var newColor = UIColor.background
+        var newColor = UIColor.dracula.background
         if active {
-            switch habitState {
+            switch state {
             case .none: break
-            case .done: newColor = .doneStroke
-            case .notDone: newColor = .notDoneStroke
+            case .single: newColor = .singleStroke
+            case .multiple: newColor = .multipleStroke
             }
         } else if isHeader {
             newColor = .headerBackground
@@ -95,42 +95,42 @@ class DayView: UIView {
         path.stroke()
         path.fill()
         
-        var animations = [CABasicAnimation]()
-        
-        let animation = CABasicAnimation(keyPath: "transform.scale")
-        animation.fromValue = shrink ? 1.0 : 0.75
-        animation.toValue = shrink ? 0.75 : 1.0
-        animation.duration = 0.5
-        animation.isRemovedOnCompletion = false
-        animation.fillMode = .forwards
-        animations.append(animation)
-        
-        // simultaneous, otherwise use beginTime
-        let animation2 = CABasicAnimation(keyPath: "opacity")
-        animation2.fromValue = shrink ? 1.0 : 0.2
-        animation2.toValue = shrink ? 0.2 : 1.0
-        animation2.duration = 0.5
-        animation2.isRemovedOnCompletion = false
-        animation2.fillMode = .forwards
-        animations.append(animation2)
-        
-        let group = CAAnimationGroup()
-        group.duration = 0.5
-        group.repeatCount = 1
-        group.animations = animations
-        group.fillMode = .forwards
-        group.isRemovedOnCompletion = false
-        
-        layer.add(group, forKey: nil)
+//        var animations = [CABasicAnimation]()
+//
+//        let animation = CABasicAnimation(keyPath: "transform.scale")
+//        animation.fromValue = shrink ? 1.0 : 0.75
+//        animation.toValue = shrink ? 0.75 : 1.0
+//        animation.duration = 0.5
+//        animation.isRemovedOnCompletion = false
+//        animation.fillMode = .forwards
+//        animations.append(animation)
+//
+//        // simultaneous, otherwise use beginTime
+//        let animation2 = CABasicAnimation(keyPath: "opacity")
+//        animation2.fromValue = shrink ? 1.0 : 0.2
+//        animation2.toValue = shrink ? 0.2 : 1.0
+//        animation2.duration = 0.5
+//        animation2.isRemovedOnCompletion = false
+//        animation2.fillMode = .forwards
+//        animations.append(animation2)
+//
+//        let group = CAAnimationGroup()
+//        group.duration = 0.5
+//        group.repeatCount = 1
+//        group.animations = animations
+//        group.fillMode = .forwards
+//        group.isRemovedOnCompletion = false
+//
+//        layer.add(group, forKey: nil)
     }
     
     private func drawText() {
         let color: UIColor
         if active {
-            switch habitState {
+            switch state {
             case .none: color = .activeText
-            case .done: color = .doneText
-            case .notDone: color = .notDoneText
+            case .single: color = .singleText
+            case .multiple: color = .multipleText
             }
         } else {
             if isHeader {

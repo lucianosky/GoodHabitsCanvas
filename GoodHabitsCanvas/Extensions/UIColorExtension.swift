@@ -23,27 +23,29 @@ extension UIColor {
     
     // DARK THEME
     // TODO: Dracula Theme - Give credit
-    static let background = UIColor(netHex: 0x282a36)
-    static let currentLine = UIColor(netHex: 0x44475a)
-    static let selection = UIColor(netHex: 0x44475a)
-    static let foreground = UIColor(netHex: 0xf8f8f2)
-    static let comment = UIColor(netHex: 0x6272a4)
-    static let cyanDracula = UIColor(netHex: 0x8be9fd)
-    static let greenDracula = UIColor(netHex: 0x50fa7b)
-    static let orangeDracula = UIColor(netHex: 0xffb86c)
-    static let pinkDracula = UIColor(netHex: 0xff79c6)
-    static let purpleDracula = UIColor(netHex: 0xbd93f9)
-    static let redDracula = UIColor(netHex: 0xff5555)
-    static let yellowDracula = UIColor(netHex: 0xf1fa8c)
+    struct dracula {
+        static let background = UIColor(netHex: 0x282a36)
+        static let currentLine = UIColor(netHex: 0x44475a)
+        static let selection = UIColor(netHex: 0x44475a)
+        static let foreground = UIColor(netHex: 0xf8f8f2)
+        static let comment = UIColor(netHex: 0x6272a4)
+        static let cyan = UIColor(netHex: 0x8be9fd)
+        static let green = UIColor(netHex: 0x50fa7b)
+        static let orange = UIColor(netHex: 0xffb86c)
+        static let pink = UIColor(netHex: 0xff79c6)
+        static let purple = UIColor(netHex: 0xbd93f9)
+        static let red = UIColor(netHex: 0xff5555)
+        static let yellow = UIColor(netHex: 0xf1fa8c)
+    }
     
-    static let headerBackground = selection
-    static let inactiveText = cyanDracula
-    static let notMonthText = comment
-    static let activeText = cyanDracula
-    static let doneStroke = greenDracula
-    static let doneText = background
-    static let notDoneStroke = redDracula
-    static let notDoneText = background
+    static let headerBackground = dracula.selection
+    static let inactiveText = dracula.cyan
+    static let notMonthText = dracula.comment
+    static let activeText = dracula.cyan
+    static let singleStroke = dracula.green
+    static let singleText = dracula.background
+    static let multipleStroke = dracula.red
+    static let multipleText = dracula.background
     
     
 }

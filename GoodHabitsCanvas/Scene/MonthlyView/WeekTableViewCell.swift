@@ -25,38 +25,15 @@ class WeekTableViewCell: UITableViewCell {
             let dayView = DayView()
             dayView.text = "\(i)"
             dayView.tag = i+1
-
-            // TODO: long press animation
-            
-//            dayView.rx
-//                .longPressGesture()
-//                .when(.began, .ended)
-//                .subscribe(onNext: { [weak self] gesture in
-//                    guard let self = self, let monthVC = self.monthViewController else {
-//                        FirebaseHelper.shared.warning(theClass: WeekTableViewCell.typeName, unexpectedNullValue: "subscribe dayView")
-//                        return
-//                    }
-//                    if gesture.state == .began {
-//                        dayView.shrink = true
-//                    } else {
-//                        dayView.shrink = false
-//                        if dayView.isHeader {
-//                            monthVC.changeStartOfWeek(tag: dayView.tag)
-//                        } else {
-//                            if let date = dayView.date {
-//                                FirebaseHelper.shared.logEvent(event: "MONTH_VIEW_DAY", parameters: ["DATE": date.yyyymmdd])
-//                                monthVC.changeHabitState(date: date)
-//                            } // not fromMonth days won't have dates
-//                        }
-//                    }
-//                })
-//                .disposed(by: self.disposeBag)
-            
             stack.addArrangedSubview(dayView)
             dayViews.append(dayView)
+            // TODO: press on header / days
+            // touch event
+            // monthVC.changeStartOfWeek(tag: dayView.tag)
+            // monthVC.changeHabitState(date: date)
         }
         contentView.addSubview(stack)
-        contentView.backgroundColor = .background
+        contentView.backgroundColor = UIColor.dracula.background
         
         let viewsDict = [
             "stack" : stack,
@@ -66,11 +43,10 @@ class WeekTableViewCell: UITableViewCell {
         contentView.activateConstraints("H:|[stack]|", views: viewsDict)
     }
     
-    //     TODO: review
-    //    override func prepareForReuse() {
-    //        super.prepareForReuse()
-    //        disposeBag = DisposeBag()
-    //    }
+    // TODO: review
+    // override func prepareForReuse() {
+    //     super.prepareForReuse()
+    // }
     
     func configure(from calWeek: CalWeek) -> WeekTableViewCell {
         
@@ -86,7 +62,7 @@ class WeekTableViewCell: UITableViewCell {
                 dayView.text = calDay.text
                 dayView.active = calDay.fromMonth
                 // TODO - review state
-                dayView.habitState = .none
+                dayView.state = .none
 //                if let date = calDay.date, calDay.fromMonth {
 //                    // dayView.habitState = monthViewController.viewModel.getHabitState(date: date)
 //                    dayView.habitState = .done
@@ -100,10 +76,10 @@ class WeekTableViewCell: UITableViewCell {
         return self
     }
     
-    func changeState(date: Date, habitState: HabitState) -> Bool {
+    func changeState(date: Date, habitState: DayViewState) -> Bool {
         for dayView in dayViews {
             if dayView.active, let dayDate = dayView.date, dayDate == date {
-                dayView.habitState = habitState
+                dayView.state = habitState
                 return true
             }
         }
